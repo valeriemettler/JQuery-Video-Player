@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Video Watcher</title>
+  <link rel="stylesheet" type="text/css" href="http://teaching-materials.org/ajax/lib/bootstrap.css">
+  <style type="text/css">
+  /* This puts titles always on a separate line from thumbnails */
+  #videos-list img {
+    display: block;
+  }
+  </style>
+ </head>
+ <body>
+
+<div class="container">
+ 
+ <div class="row">
+   <div class="span12">
+    <h2 class="page-header">Best Videos Ever ❤ </h1>
+   </div>
+ </div>
+ <div class="g-plusone" data-annotation="inline" data-width="300"></div>
+ <div><a class="twitter-share-button" href="https://twitter.com/share">Tweet</a></div>
+
+
+
+ <div class="row">
+   <div class="span3">
+     <ul id="videos-list">
+    </ul>
+   </div>
+   <div class="span9" id="video-watcher">
+   </div>
+ </div>
+</div>
+
+ <script type="text/javascript" src="http://teaching-materials.org/ajax/lib/youtube.js"></script>
+ <script type="text/javascript" src="http://teaching-materials.org/ajax/lib/jquery.min.js"></script>
+ <script>
+
+ var addVideoToList = function(video) {
+
+    var videoLink = $('<a>');
+    videoLink.append(video.title);
+    var thumbnailUrl = youtube.generateThumbnailUrl(video.youtubeId);
+    var thumbnailImg = $('<img>');
+    thumbnailImg.attr('src', thumbnailUrl);
+    videoLink.append(thumbnailImg);
+    
+    videoLink.on('click', function(e) {
+        e.preventDefault();
+
+        var videoTitle = $('<h2>');
+        videoTitle.html(video.title + ' <small>' + video.author + '</small>');
+
+        var videoEmbed = $('<iframe></iframe>');
+        videoEmbed.attr('src', youtube.generateEmbedUrl(video.youtubeId));
+        videoEmbed.attr('width', 560);
+        videoEmbed.attr('height', 315);
+
+        var videoWatcher = $('#video-watcher');
+        videoWatcher.hide();
+        videoWatcher.empty();
+        videoWatcher.append(videoTitle);
+        videoWatcher.append(videoEmbed);
+        videoWatcher.fadeIn();
+    });
+
+    var videoItem = $('<li>');
+    videoItem.append(videoLink);
+    $('#videos-list').append(videoItem);
+ };
+
+ $.ajax({type: "GET", //get request ajax (it's calling an ajax function here and passing in an options object ...one object withing { } and the "options" are inside with type: "GET" for one option example)
+   url: "videos.json", //telling where the file is
+   dataType: "json", // the type of data is json
+   success: function(videos) { //(videos) gets passed in as the data 
+    for (var i = 0; i < videos.length; i++) { // for = I want you to loop, var i = 0;) = start at index 0, (i < videos.length;) = and while i is less than the length of this list, (i++)= add one
+      addVideoToList(videos[i]); 
+ } },
+   error: function(xhr, status, e) {console.log()}
+})
+ 
+ </script>
+ <script src="https://apis.google.com/js/platform.js" async defer></script>
+ <script type="text/javascript">
+window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+</script>
+
+ </body>
+</html>
