@@ -14,7 +14,7 @@
  <body>
 
 <div class="container">
- 
+
  <div class="row">
    <div class="span12">
     <h2 class="page-header">Best Videos Ever ❤ </h1>
@@ -47,7 +47,7 @@
     var thumbnailImg = $('<img>');
     thumbnailImg.attr('src', thumbnailUrl);
     videoLink.append(thumbnailImg);
-    
+
     videoLink.on('click', function(e) {
         e.preventDefault();
 
@@ -72,16 +72,16 @@
     $('#videos-list').append(videoItem);
  };
 
- $.ajax({type: "GET", //get request ajax (it's calling an ajax function here and passing in an options object ...one object withing { } and the "options" are inside with type: "GET" for one option example)
+ $.ajax({type: "GET", //get request ajax (it's calling an ajax function here and passing in an options object ...one object within { } and the "options" are inside with type: "GET" for one option example)
    url: "videos.json", //telling where the file is
    dataType: "json", // the type of data is json
-   success: function(videos) { //(videos) gets passed in as the data 
+   success: function(videos) { //(videos) gets passed in as the data
     for (var i = 0; i < videos.length; i++) { // for = I want you to loop, var i = 0;) = start at index 0, (i < videos.length;) = and while i is less than the length of this list, (i++)= add one
-      addVideoToList(videos[i]); 
+      addVideoToList(videos[i]);
  } },
    error: function(xhr, status, e) {console.log()}
 })
- 
+
  </script>
  <script src="https://apis.google.com/js/platform.js" async defer></script>
  <script type="text/javascript">

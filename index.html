@@ -56,18 +56,13 @@
 
         var videoRating = $('<img></img>');
         videoRating.attr('src', 'https://chart.googleapis.com/chart?chs=225x125&cht=gom&chd=t:' + video.rating);
-         //you get the above url from going to the api site and right clicking and copy url and just modify the ending slightly.  then we are adding 2 strings together, string concatination (the url and the video rating...(which comes from down below in var videos = and then attach the rating )), then append the videoRating var to the var videoWatcher below
-
-        // var chartRating = $('<img></img>');
-        // chartRating.attr('src', 'https://chart.googleapis.com/chart?cht=bhs&chs=200x125&chd=s:ello&chco=4d89f9:' + ??.rating);
-        //need to add all 4 of the ratings to this chart
 
         var videoWatcher = $('#video-watcher');
         videoWatcher.hide();
         videoWatcher.empty();
         videoWatcher.append(videoTitle);
         videoWatcher.append(videoEmbed);
-        videoWatcher.append(videoRating);  //this is where we append the ratings to the videowatcher
+        videoWatcher.append(videoRating);
         videoWatcher.fadeIn();
     });
 
